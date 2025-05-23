@@ -34,6 +34,9 @@ const Admin: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   
+  // Backend API base URL – use env var in production, fallback to Heroku deployment
+  const API_URL = process.env.REACT_APP_API_URL || 'https://ai-humanizer-backend-7e417b1aab8a.herokuapp.com/api';
+  
   useEffect(() => {
     // Redirect if not authenticated
     if (!isAuthenticated) {
@@ -57,7 +60,7 @@ const Admin: React.FC = () => {
   const fetchStats = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3001/api/admin/stats', {
+      const response = await fetch(`${API_URL}/admin/stats`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -83,7 +86,7 @@ const Admin: React.FC = () => {
   const fetchUsers = async (page: number) => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:3001/api/admin/users?page=${page}&limit=10`, {
+      const response = await fetch(`${API_URL}/admin/users?page=${page}&limit=10`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -106,7 +109,7 @@ const Admin: React.FC = () => {
   
   const makeAdmin = async (userId: number) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/admin/make-admin/${userId}`, {
+      const response = await fetch(`${API_URL}/admin/make-admin/${userId}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

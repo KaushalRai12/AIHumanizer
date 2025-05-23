@@ -20,10 +20,13 @@ const Pricing: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
+  // Backend API base URL – use env var in production, fallback to Heroku deployment
+  const API_URL = process.env.REACT_APP_API_URL || 'https://ai-humanizer-backend-7e417b1aab8a.herokuapp.com/api';
+
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/subscriptions');
+        const response = await fetch(`${API_URL}/subscriptions`);
         
         if (!response.ok) {
           throw new Error('Failed to fetch pricing plans');

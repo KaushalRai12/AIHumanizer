@@ -18,10 +18,13 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Backend API base URL – use env var in production, fallback to Heroku deployment
+  const API_URL = process.env.REACT_APP_API_URL || 'https://ai-humanizer-backend-7e417b1aab8a.herokuapp.com/api';
+
   useEffect(() => {
     const fetchUserStatistics = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/users/statistics', {
+        const response = await fetch(`${API_URL}/users/statistics`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
