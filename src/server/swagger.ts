@@ -21,8 +21,8 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: 'http://localhost:3001/api',
-      description: 'Development server',
+      url: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3001/api',
+      description: 'API server',
     },
   ],
   components: {
