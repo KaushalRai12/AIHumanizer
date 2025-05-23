@@ -34,7 +34,8 @@
     "test:api": "jest --testPathPattern=tests/api",
     "test:api:watch": "jest --watch --testPathPattern=tests/api",
     "test:all": "jest",
-    "start:prod": "node dist/index.js"
+    "start:prod": "node dist/index.js",
+    "build:frontend": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [

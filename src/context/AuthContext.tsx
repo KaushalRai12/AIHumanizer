@@ -27,7 +27,8 @@ interface AuthContextType {
   token: string | null;
 }
 
-const API_URL = 'http://localhost:3001/api';
+// Backend API base URL – use env var in production, fallback to localhost in dev
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
