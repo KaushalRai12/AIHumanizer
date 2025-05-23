@@ -18,8 +18,20 @@ const port = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://ai-humanizer-42hg.vercel.app', 'https://ai-humanizer.vercel.app']
+  origin: process.env.NODE_ENV === 'production'
+    ? (origin, callback) => {
+        if (!origin) return callback(null, true); // allow mobile apps / curl
+        const allowedOrigins = [
+          'https://ai-humanizer-42hg.vercel.app',
+          'https://ai-humanizer.vercel.app'
+        ];
+        const vercelPattern = /https?:\/\/ai-humanizer-[\w-]+\.vercel\.app/;
+        if (allowedOrigins.includes(origin) || vercelPattern.test(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      }
     : ['http://localhost:3000', 'http://localhost:5173'],
   credentials: true
 }));
