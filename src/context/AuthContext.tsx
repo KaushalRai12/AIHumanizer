@@ -28,7 +28,7 @@ interface AuthContextType {
 }
 
 // Backend API base URL – use env var in production, fallback to localhost in dev
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://ai-humanizer-backend-7e417b1aab8a.herokuapp.com/api';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 

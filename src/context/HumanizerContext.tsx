@@ -36,7 +36,7 @@ interface HumanizerContextType {
   loadingCreditInfo: boolean;
 }
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://ai-humanizer-backend-7e417b1aab8a.herokuapp.com/api';
 
 const HumanizerContext = createContext<HumanizerContextType | undefined>(undefined);
 
