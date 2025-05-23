@@ -1,0 +1,56 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+{
+  "version": "1.0",
+  "rules": [
+    {
+      "name": "Auto-Update Documentation and Diagrams",
+      "description": "Automatically updates project documentation and diagrams when changes are made",
+      "execution_mode": "automatic",
+      "triggers": [
+        {
+          "type": "file_change",
+          "pattern": "**/*.{js,ts,jsx,tsx,py,java,cpp,c,h,hpp}"
+        },
+        {
+          "type": "file_change",
+          "pattern": "**/features.md"
+        }
+      ],
+      "actions": [
+        {
+          "type": "update_documentation",
+          "targets": [
+            "docs/project.md",
+            "docs/features.md",
+            "docs/changelog.md"
+          ],
+          "auto_execute": true
+        },
+        {
+          "type": "generate_diagrams",
+          "tools": ["mermaid", "plantuml"],
+          "output_dir": "docs/diagrams",
+          "auto_execute": true
+        },
+        {
+          "type": "update_changelog",
+          "target": "docs/changelog.md",
+          "auto_execute": true,
+          "format": "## [Unreleased]\n\n### Added\n- {file} modified on {date} by {author}\n\n### Changed\n- None\n\n### Deprecated\n- None\n\n### Removed\n- None\n\n### Fixed\n- None\n\n### Security\n- None"
+        },
+        {
+          "type": "commit",
+          "message_template": "docs: auto-update documentation and diagrams",
+          "auto_execute": true
+        }
+      ]
+    }
+  ]
+}
+
+
+
